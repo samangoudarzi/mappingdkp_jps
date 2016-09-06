@@ -6,24 +6,24 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.23.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.23.0/mapbox-gl.css' rel='stylesheet' />
+
     <style>
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
     </style>
 </head>
 <body>
+
 <style>
 /*below is for the title*/
 body { margin:0; padding:0; }
-h2 {
-    margin: 0px;
+h2 {margin: 0px;
     font-size: 25px;
     text-align: center;
     font-family: 'DIN Offc Pro Medium', Arial, Regular;
     color: #5FABA7;
 }
-h3 {
-    margin: 0px;
+h3 {margin: 0px;
     font-size: 13px;
     text-align: center;
     font-family: 'DIN Offc Pro Medium', Arial, Regular;
@@ -101,6 +101,9 @@ p {
         background: #70A4A1;
     }
 </style>
+
+<nav id="menu"></nav>
+<div id="map"></div>
 <div class='map-overlay' id='features'><h2><a href="http://www.tandfonline.com/toc/fjps20/current"style='color:#5FABA7;text-decoration:
 none'>The Journal of Peasant Studies </a> Author Affiliations</h2><h3>Mapping the Porduction of Development Knowledge</h3><h3>Made by 
 <a href="https://samangoudarzi.github.io"style='color:#836c8b;text-decoration:none'>Saman Goudarzi</a></h3><div id='pd'><p>This map is
@@ -108,21 +111,16 @@ part of a larger project examining patterns of publication in the field of inter
 <a href='https://www.sciencebase.gov/catalog/item/4f4e4acee4b07f02db67fb39'style='color:#836c8b;text-decoration:none'> ScienceBase 
 Catalog </a> and <a href='http://geo2.scholarsportal.info/#r/tab/browseTab/result'style='color:#836c8b;text-decoration:none'> Scholars 
 GeoPortal</a> was used.</p></div></div>
-<nav id="menu"></nav>
-<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-supported/v1.2.0/mapbox-gl-supported.js'></script>
-<div id="map"></div>
+
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ2FtYW4iLCJhIjoiY2lzajQ2N2YzMDF4cjJ1cHVsdzd1b2ZlOCJ9.K6uUaMmeJ16TFmaORHcp0g';
-if (!mapboxgl.supported()) {
-    alert('Your browser does not support Mapbox GL');
-} else {
-    var map = new mapboxgl.Map({
+var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/gaman/cisnin93i00172ymunortk9dg', 
     center: [19.5, 21],
-    zoom: 1.6
+    zoom: 1.8
 });
-
+    
 var popup = new mapboxgl.Popup({
     closeButton: false,
     closeOnClick: false
@@ -195,5 +193,6 @@ for (var i = 0; i < dates.length; i++) {
     layers.appendChild(link);
 }
 </script>
+
 </body>
 </html>
