@@ -15,13 +15,15 @@
 <style>
 /*below is for the title*/
 body { margin:0; padding:0; }
-h2 {margin: 0px;
+h2 {
+    margin: 0px;
     font-size: 25px;
     text-align: center;
     font-family: 'DIN Offc Pro Medium', Arial, Regular;
     color: #5FABA7;
 }
-h3 {margin: 0px;
+h3 {
+    margin: 0px;
     font-size: 13px;
     text-align: center;
     font-family: 'DIN Offc Pro Medium', Arial, Regular;
@@ -99,6 +101,14 @@ p {
         background: #70A4A1;
     }
 </style>
+<div class='map-overlay' id='features'><h2><a href="http://www.tandfonline.com/toc/fjps20/current"style='color:#5FABA7;text-decoration:
+none'>The Journal of Peasant Studies </a> Author Affiliations</h2><h3>Mapping the Porduction of Development Knowledge</h3><h3>Made by 
+<a href="https://samangoudarzi.github.io"style='color:#836c8b;text-decoration:none'>Saman Goudarzi</a></h3><div id='pd'><p>This map is
+part of a larger project examining patterns of publication in the field of international development. Data from the 
+<a href='https://www.sciencebase.gov/catalog/item/4f4e4acee4b07f02db67fb39'style='color:#836c8b;text-decoration:none'> ScienceBase 
+Catalog </a> and <a href='http://geo2.scholarsportal.info/#r/tab/browseTab/result'style='color:#836c8b;text-decoration:none'> Scholars 
+GeoPortal</a> was used.</p></div></div>
+<nav id="menu"></nav>
 <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-supported/v1.2.0/mapbox-gl-supported.js'></script>
 <div id="map"></div>
 <script>
@@ -112,15 +122,6 @@ if (!mapboxgl.supported()) {
     center: [19.5, 21],
     zoom: 1.6
 });
-    
-<nav id="menu"></nav>
-<div class='map-overlay' id='features'><h2><a href="http://www.tandfonline.com/toc/fjps20/current"style='color:#5FABA7;text-decoration:
-none'>The Journal of Peasant Studies </a> Author Affiliations</h2><h3>Mapping the Porduction of Development Knowledge</h3><h3>Made by 
-<a href="https://samangoudarzi.github.io"style='color:#836c8b;text-decoration:none'>Saman Goudarzi</a></h3><div id='pd'><p>This map is
-part of a larger project examining patterns of publication in the field of international development. Data from the 
-<a href='https://www.sciencebase.gov/catalog/item/4f4e4acee4b07f02db67fb39'style='color:#836c8b;text-decoration:none'> ScienceBase 
-Catalog </a> and <a href='http://geo2.scholarsportal.info/#r/tab/browseTab/result'style='color:#836c8b;text-decoration:none'> Scholars 
-GeoPortal</a> was used.</p></div></div>
 
 var popup = new mapboxgl.Popup({
     closeButton: false,
