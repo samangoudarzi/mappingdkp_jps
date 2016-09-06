@@ -114,12 +114,15 @@ Catalog </a> and <a href='http://geo2.scholarsportal.info/#r/tab/browseTab/resul
 GeoPortal</a> was used.</p></div></div>
 
 <script>
-mapboxgl.accessToken = 'pk.eyJ1IjoiZ2FtYW4iLCJhIjoiY2lzajQ2N2YzMDF4cjJ1cHVsdzd1b2ZlOCJ9.K6uUaMmeJ16TFmaORHcp0g';
-var map = new mapboxgl.Map({
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-supported/v1.2.0/mapbox-gl-supported.js'></script>
+if (!mapboxgl.supported()) {
+    alert('Your browser does not support Mapbox GL');
+} else {
+    var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/gaman/cisnin93i00172ymunortk9dg', 
     center: [19.5, 21],
-    zoom: 1.8
+    zoom: 1.6
 });
     
 var popup = new mapboxgl.Popup({
