@@ -11,9 +11,103 @@
     </style>
 </head>
 <body>
-
+<style>
+/*below is for the title*/
+body { margin:0; padding:0; }
+h2 {margin: 0px;
+    font-size: 25px;
+    text-align: center;
+    font-family: 'DIN Offc Pro Medium', Arial, Regular;
+    color: #5FABA7;
+}
+h3 {margin: 0px;
+    font-size: 13px;
+    text-align: center;
+    font-family: 'DIN Offc Pro Medium', Arial, Regular;
+    color: #836c8b;
+}
+p {
+    font-size: 12px;
+    margin: -0.3px;
+    text-align: center;
+    font-family: 'DIN Offc Pro Medium', Arial, Regular;
+    color: #836c8b;
+}
+.map-overlay {
+    position: relative;
+    left: 35px;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    font-family: Arial, sans-serif;
+    overflow: auto;
+    border-radius: 2px;
+}
+#features {
+    top: 0;
+    height: 145px;
+    margin-top: 25px;
+    width: 356px;
+}
+    /*below is for popups*/
+   .mapboxgl-popup {
+        max-width: 500px;
+        color: #6B6B6B;
+        font: 10.5px/20px 'DIN Offc Pro Medium', Arial, Unicode, MS, Regular;
+    }
+    
+    /*below is for buttons*/
+    /* Font colour in normal menu*/
+    #menu {
+        background: #F6F6F4;
+        position: absolute;
+        z-index: 1;
+        top: 18px;
+        right: 10px;
+        border-radius: 2px;
+        width: 60px;
+        border: 1px solid rgba(0,0,0,0.4);
+        font-family: 'DIN Offc Pro Medium', Arial, Unicode, MS, Regular;
+    }
+     /* Font colour in OFF menu*/
+    #menu a {
+        font-size: 11px;
+        color: #5FABA7;
+        display: block;
+        margin: 0;
+        padding: 0;
+        padding: 10px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0,0,0,0.25);
+        text-align: center;
+    }
+    #menu a:last-child {
+        border: none;
+    }
+    /*Hovering colour, when selection is OFF*/
+    #menu a:hover {
+        background-color: #F0F1EF;
+        color: #5FABA7;
+    }
+    /* Colour when selection is ON*/
+    #menu a.active {
+        background-color: #5FABA7;
+        color: #F6F6F4;
+    }
+    /*Hovering colour, when selection is ON*/
+    #menu a.active:hover {
+        background: #70A4A1;
+    }
+</style>
 <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-supported/v1.2.0/mapbox-gl-supported.js'></script>
 <div id='map'></div>
+<nav id="menu"></nav>
+<div class='map-overlay' id='features'><h2><a href="http://www.tandfonline.com/toc/fjps20/current"style='color:#5FABA7;text-decoration:
+none'>The Journal of Peasant Studies </a> Author Affiliations</h2><h3>Mapping the Porduction of Development Knowledge</h3><h3>Made by 
+<a href="https://samangoudarzi.github.io"style='color:#836c8b;text-decoration:none'>Saman Goudarzi</a></h3><div id='pd'><p>This map is
+part of a larger project examining patterns of publication in the field of international development. Data from the 
+<a href='https://www.sciencebase.gov/catalog/item/4f4e4acee4b07f02db67fb39'style='color:#836c8b;text-decoration:none'> ScienceBase 
+Catalog </a> and <a href='http://geo2.scholarsportal.info/#r/tab/browseTab/result'style='color:#836c8b;text-decoration:none'> Scholars 
+GeoPortal</a> was used.</p></div></div>
 
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ2FtYW4iLCJhIjoiY2lzajQ2N2YzMDF4cjJ1cHVsdzd1b2ZlOCJ9.K6uUaMmeJ16TFmaORHcp0g';
@@ -26,6 +120,77 @@ if (!mapboxgl.supported()) {
         center: [19.5, 21],
         zoom: 1.8
     });
+}
+var popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+});
+map.on('mousemove', function(e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['2005_count1', '2005_count2', '2006_count1', 
+    '2006_count2', '2007_count1', '2007_count2', '2008_count1', '2008_count2', '2008_count3', '2009_count1',
+    '2009_count2', '2009_count3', '2010_count1', '2010_count2', '2010_count4', '2010_count8', '2011_count1', 
+    '2011_count2', '2011_count3', '2011_count4', '2011_count5', '2012_count1', '2012_count2', '2012_count3', 
+    '2012_count4', '2012_count5', '2012_count8', '2013_count1', '2013_count2', '2013_count3', '2013_count6', 
+    '2014_count1', '2014_count2', '2014_count3', '2014_count5', '2015_count1', '2015_count2', '2015_count3', 
+    '2015_count5', '2015_count8'] });
+    map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+    if (!features.length) {
+        popup.remove();
+        return;
+    }
+    var feature = features[0];
+    // Populate the popup and set its coordinates
+    // based on the feature found.
+    popup.setLngLat(feature.geometry.coordinates)
+        .setHTML(feature.properties.NAME)
+        .addTo(map);
+});
+var groupedLayers = {};
+var layerIds = ['2005_count1', '2005_count2', '2006_count1', '2006_count2', '2007_count1', '2007_count2', 
+    '2008_count1', '2008_count2', '2008_count3', '2009_count1', '2009_count2', '2009_count3', '2010_count1', 
+    '2010_count2', '2010_count4', '2010_count8', '2011_count1', '2011_count2', '2011_count3', '2011_count4', 
+    '2011_count5', '2012_count1', '2012_count2', '2012_count3', '2012_count4', '2012_count5', '2012_count8', 
+    '2013_count1', '2013_count2', '2013_count3', '2013_count6', '2014_count1', '2014_count2', '2014_count3', 
+    '2014_count5', '2015_count1', '2015_count2', '2015_count3', '2015_count5', '2015_count8'];
+var dates = ['2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015'];
+for (var i = 0; i < dates.length; i++) {
+  groupedLayers[dates[i]] = [];
+}
+//loop over your layerIds to match with the RegExp
+for (var i = 0; i < layerIds.length; i++) {
+  for (var j = 0; j < dates.length; j++) {
+    var searchPattern = new RegExp('^' + dates[j]);
+    if (searchPattern.test(layerIds[i])) {
+      groupedLayers[dates[j]].push(layerIds[i]);
+    }
+  }
+}
+console.log(groupedLayers)
+for (var i = 0; i < dates.length; i++) {
+    var date = dates[i];
+    var link = document.createElement('a');
+    link.href = '#';
+    link.className = 'active';
+    link.textContent = date;
+    link.onclick = function (e) {
+        var clickedLayers = groupedLayers[this.textContent];
+        console.log(clickedLayers)
+        e.preventDefault();
+        e.stopPropagation();
+        for (var j=0; j<clickedLayers.length; j++) {
+          var clickedLayer = clickedLayers[j];
+          var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+          if (visibility === 'visible') {
+              map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+              this.className = '';
+          } else {
+              this.className = 'active';
+              map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+          }
+        }
+    };
+    var layers = document.getElementById('menu');
+    layers.appendChild(link);
 }
 </script>
 
