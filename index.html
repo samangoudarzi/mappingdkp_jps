@@ -122,6 +122,11 @@ if (!mapboxgl.supported()) {
         zoom: 1.6
     });
 }
+
+if (!mapboxgl.supported()) {
+    document.getElementById("menu").style.display="none";
+}
+
 var popup = new mapboxgl.Popup({
     closeButton: false,
     closeOnClick: false
